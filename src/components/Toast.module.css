@@ -1,0 +1,23 @@
+/* Toast default styling */
+.toast {
+  position: fixed;
+  top: 15px;
+  right: 10px;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 10px 10px;
+  border-radius: 5px;
+  z-index: 1000;
+  transition: opacity 0.5s ease-in-out;
+}
+
+/* Move the toast to the bottom on smaller screens */
+@media (max-width: 768px) {
+  .toast {
+      top: auto; /* Reset the top position */
+      bottom: 50px; /* Move to the bottom */
+      left: 50%;
+      right: auto; /* Reset right */
+      transform: translateX(-50%); /* Center the toast horizontally */
+  }
+}
