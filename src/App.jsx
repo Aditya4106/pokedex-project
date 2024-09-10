@@ -56,35 +56,38 @@ function App() {
     item.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
-  const router = createBrowserRouter([
+  const router = createBrowserRouter(
+    [
+      {
+        path: "/",
+        element: (
+          <>
+            <Navbar searchQuery={searchQuery} handleSearchChange={handleSearchChange} />
+            <Home />
+            <div className="card-container">
+              {filteredData.map((item) => (
+                <Cards
+                  key={item.id}
+                  id={item.id}
+                  name={item.name}
+                  sprite={item.sprites.front_default}
+                  type={item.types.map((type) => type.type.name).join(", ")}
+                />
+              ))}
+            </div>
+          </>
+        ),
+      },
+      {
+        path: "/pokemon/:id",
+        element: <PokemonInfo />,
+      },
+    ],
     {
-      path: "/",
-      element: (
-        <>
-          <Navbar
-            searchQuery={searchQuery}
-            handleSearchChange={handleSearchChange}
-          />
-          <Home />
-          <div className="card-container">
-            {filteredData.map((item) => (
-              <Cards
-                key={item.id}
-                id={item.id}
-                name={item.name}
-                sprite={item.sprites.front_default}
-                type={item.types.map((type) => type.type.name).join(", ")}
-              />
-            ))}
-          </div>
-        </>
-      ),
-    },
-    {
-      path: "/pokemon/:id",
-      element: <PokemonInfo />,
-    },
-  ]);
+      basename: "/pokedex-project", // This tells the router that the base path is /pokedex-project
+    }
+  );
+  
 
   useEffect(() => {
     const fetchData = async () => {
