@@ -1,0 +1,89 @@
+/* Default card styling for laptops and larger screens */
+.card {
+  background-color: white;
+  cursor: pointer;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  width: 10rem; /* Original card width */
+  height: 12rem; /* Original card height */
+  box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.1);
+  margin-bottom: 16px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Image inside the card */
+.card img {
+  width: 80%; /* Keep the image size manageable */
+  height: auto;
+  object-fit: contain;
+  margin-bottom: 8px;
+}
+
+/* Center the name heading */
+.heading {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 8px;
+}
+
+/* Text inside the card */
+.card p {
+  font-size: 15px;
+  text-align: center;
+}
+
+/* Hover effect */
+.card:hover {
+  background-color: #02182B;
+  color: white;
+}
+
+/* Card container layout (flex display for laptops and larger screens) */
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  padding: 8px;
+  justify-content: space-around;
+}
+
+/* Media Queries for responsiveness */
+
+/* For screens smaller than 768px (Androids, iPhones) */
+@media (max-width: 768px) {
+  .card-container {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr); /* 4x4 layout */
+      gap: 10px;
+  }
+
+  .card {
+      width: 9rem;  /* Increased card width for mobile */
+      height: 11rem; /* Increased card height for mobile */
+  }
+
+  .card p {
+      font-size: 14px; /* Adjust text size for mobile */
+  }
+}
+
+/* For very small screens (below 480px) */
+@media (max-width: 480px) {
+  .card-container {
+      grid-template-columns: repeat(2, 1fr); /* 2 cards per row for very small screens */
+  }
+
+  .card {
+      width: 10rem; /* Larger size compared to previous */
+      height: 10rem;
+  }
+
+  .card p {
+      font-size: 13px;
+  }
+}
