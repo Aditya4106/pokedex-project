@@ -8,7 +8,7 @@ const Navbar = ({ searchQuery, handleSearchChange }) => {
     <div className="navbar-container">
       <div className="content">
         <p>
-          <img src="src/assets/pokeball/5.svg" alt="Pokeball" />Welcome to Pokedex
+          <img src="./assets/pokeball/5.svg" alt="Pokeball" />Welcome to Pokedex
         </p>
         <div className="search-container">
           <FontAwesomeIcon icon={faSearch} className="search-icon" />

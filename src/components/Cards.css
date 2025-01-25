@@ -3,13 +3,13 @@
   background-color: white;
   cursor: pointer;
   border: 1px solid #ddd;
-  border-radius: 8px;
+  border-radius: 12px;
   padding: 16px;
-  width: 10rem; /* Original card width */
-  height: 12rem; /* Original card height */
-  box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.1);
-  margin-bottom: 16px;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  width: 12rem; /* Increased card width */
+  height: 14rem; /* Increased card height */
+  box-shadow: 2px 4px 15px rgba(0, 0, 0, 0.15);
+  margin-bottom: 20px;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -18,72 +18,137 @@
 
 /* Image inside the card */
 .card img {
-  width: 80%; /* Keep the image size manageable */
+  width: 80%;
   height: auto;
   object-fit: contain;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* Hover effect on card */
+.card:hover {
+  background-color: #02182B;
+  color: white;
+  transform: translateY(-5px);
+}
+
+/* Hover effect on image */
+.card:hover img {
+  transform: scale(1.1);
+  opacity: 0.9; /* Add opacity change on hover */
 }
 
 /* Center the name heading */
 .heading {
   display: flex;
   justify-content: center;
+  align-items: center;
+  margin-bottom: 12px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: #222; /* Darker color for better readability */
+}
+
+/* Name text inside the card */
+.card-name {
+  font-size: 1rem;
+  color: #333; /* Dark color for text */
+  font-weight: bold;
+  text-align: center;
   margin-bottom: 8px;
 }
 
-/* Text inside the card */
-.card p {
-  font-size: 15px;
-  text-align: center;
-}
-
-/* Hover effect */
-.card:hover {
-  background-color: #02182B;
-  color: white;
+/* Type tag styling (like 'Fire', 'Water') */
+.pokemon-type {
+  font-size: 12px;
+  font-weight: bold;
+  padding: 4px 10px; /* Padding for a neat look */
+  border-radius: 12px; /* Rounded corners */
+  text-transform: capitalize; /* Capitalize the first letter */
+  color: white; /* White text for contrast */
+  margin-top: 8px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* Slight shadow for depth */
+  transition: transform 0.2s ease;
 }
 
 /* Card container layout (flex display for laptops and larger screens) */
 .card-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 15px;
-  padding: 8px;
-  justify-content: space-around;
+  gap: 20px;
+  padding: 20px;
+  justify-content: center; /* Center the cards */
+}
+
+/* Hover effect for the card name and type */
+.card:hover .card-name,
+.card:hover .pokemon-type {
+  color: #f1f1f1; /* Light color for text when hovering */
 }
 
 /* Media Queries for responsiveness */
 
-/* For screens smaller than 768px (Androids, iPhones) */
-@media (max-width: 768px) {
+/* For screens smaller than 1024px (tablets, medium screens) */
+@media (max-width: 1024px) {
   .card-container {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr); /* 4x4 layout */
-      gap: 10px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 cards per row */
+    gap: 5px;
   }
 
   .card {
-      width: 9rem;  /* Increased card width for mobile */
-      height: 11rem; /* Increased card height for mobile */
+    width: 10rem;
+    height: 12rem;
   }
 
-  .card p {
-      font-size: 14px; /* Adjust text size for mobile */
+  .card-name {
+    font-size: 0.95rem;
+  }
+
+  .pokemon-type {
+    font-size: 11px;
+    padding: 3px 8px;
+  }
+}
+
+/* For screens between 480px and 768px (small screens like iPhones and some Androids) */
+@media (min-width: 480px) and (max-width: 768px) {
+  .card-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 cards per row */
+    gap: 10px;
+  }
+
+  .card {
+    width: 9rem;
+    height: 11rem;
+  }
+
+  .card-name {
+    font-size: 0.9rem;
+  }
+
+  .pokemon-type {
+    font-size: 10px;
+    padding: 2px 6px;
   }
 }
 
 /* For very small screens (below 480px) */
 @media (max-width: 480px) {
-  .card-container {
-      grid-template-columns: repeat(2, 1fr); /* 2 cards per row for very small screens */
-  }
+  
 
   .card {
-      width: 10rem; /* Larger size compared to previous */
-      height: 10rem;
+    width: 7rem;
+    height: 10rem;
   }
 
-  .card p {
-      font-size: 13px;
+  .card-name {
+    font-size: 0.8rem;
+  }
+
+  .pokemon-type {
+    font-size: 9px;
+    padding: 2px 4px;
   }
 }
