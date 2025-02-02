@@ -1,68 +1,92 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Home from "./components/Home";
 import { useState, useEffect } from "react";
-import styles from "./App.module.css";
+import "./App.css";
+import Home from "./components/Home";
 import Cards from "./components/Cards";
 import Navbar from "./components/Navbar";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import PokemonInfo from "./components/PokemonInfo";
 import Toast from "./components/Toast";
 
 function App() {
   const [data, setData] = useState([]);
-  const [showToast, setShowToast] = useState(false);
-  const [audioPlayed, setAudioPlayed] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [showToast, setShowToast] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
-  const handleSearchChange = (e) => {
-    setSearchQuery(e.target.value);
-  };
+  const [audioPlayed, setAudioPlayed] = useState(false);
 
-  
+  const POKEMON_COUNT = 150; // Define the number of Pokémon
 
+  // Function to fetch Pokémon data
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowToast(true);
-    }, 1000); // Show the toast after 1 second
+    const fetchData = async () => {
+      try {
+        const results = await Promise.all(
+          Array.from({ length: POKEMON_COUNT }, (_, index) =>
+            fetch(`https://pokeapi.co/api/v2/pokemon/${index + 1}`).then((res) =>
+              res.json()
+            )
+          )
+        );
+        setData(results);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching Pokémon data:", error);
+      }
+    };
 
-    return () => clearTimeout(timer); // Cleanup timer
+    fetchData();
   }, []);
 
   // Function to play Pikachu sound
   const playPikachuSound = () => {
     if (!audioPlayed) {
-      const audio = new Audio("https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/25.ogg");
+      const audio = new Audio(
+        "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/25.ogg"
+      );
       audio.play();
-      setAudioPlayed(true); // Set to true so it doesn't play again
+      setAudioPlayed(true);
     }
   };
 
-  // Play sound on user interaction
+  // Play Pikachu sound on user interaction
   useEffect(() => {
     const handleUserInteraction = () => {
       playPikachuSound();
-      document.removeEventListener('click', handleUserInteraction); // Remove listener after first click
+      document.removeEventListener("click", handleUserInteraction);
     };
 
-    document.addEventListener('click', handleUserInteraction);
+    document.addEventListener("click", handleUserInteraction);
 
     return () => {
-      document.removeEventListener('click', handleUserInteraction); // Cleanup listener
+      document.removeEventListener("click", handleUserInteraction);
     };
   }, []);
 
+  // Toast logic
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowToast(true);
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  // Filter Pokémon data based on search
   const filteredData = data.filter((item) =>
     item.name.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
+  // React Router setup
   const router = createBrowserRouter(
     [
       {
         path: "/",
         element: (
           <>
-            <Navbar searchQuery={searchQuery} handleSearchChange={handleSearchChange} />
+            <Navbar
+              searchQuery={searchQuery}
+              handleSearchChange={(e) => setSearchQuery(e.target.value)}
+            />
             <Home />
             <div className="card-container">
               {filteredData.map((item) => (
@@ -84,42 +108,23 @@ function App() {
       },
     ],
     {
-      basename: "/pokedex-project", // This tells the router that the base path is /pokedex-project
+      basename: "/pokedex-project",
     }
   );
-  
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const results = [];
-      for (let i = 1; i <= 150; i++) {
-        try {
-          const response = await fetch(
-            `https://pokeapi.co/api/v2/pokemon/${i}`
-          );
-          const result = await response.json();
-          results.push(result); // Accumulate results in the array
-        } catch (error) {
-          console.error("Error fetching data", error);
-        }
-      }
-
-      setData(results);
-      // Set the state with the full array
-      setLoading(false);
-    };
-
-    fetchData();
-  }, []);
 
   if (loading) {
-    return <p>Loading....</p>;
+    return (
+      <div className="loading-container">
+        <p>Loading...</p>
+        {/* Optional: Add a spinner graphic */}
+      </div>
+    );
   }
 
   return (
     <>
       {showToast && <Toast message="Welcome to the Pokémon World!" />}
-      <RouterProvider router={router}></RouterProvider>
+      <RouterProvider router={router} />
     </>
   );
 }

@@ -1,0 +1,133 @@
+/* Global Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body and HTML */
+body, html {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, #81ecec, #74b9ff);
+  color: #2d3436;
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Navbar */
+.navbar {
+  background: rgba(255, 255, 255, 0.8);
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 10;
+}
+
+.navbar input[type="text"] {
+  padding: 0.5rem 1rem;
+  border: 2px solid #74b9ff;
+  border-radius: 5px;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.navbar input[type="text"]:focus {
+  border-color: #0984e3;
+  box-shadow: 0 0 5px rgba(9, 132, 227, 0.5);
+}
+
+/* Main Container */
+.container {
+  max-width: 1200px;
+  margin: 5rem auto;
+  padding: 1rem;
+  text-align: center;
+}
+
+/* Cards */
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  padding: 2rem 1rem;
+}
+
+/* Specific selector for cards */
+.pokedex-card .card {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.pokedex-card .card img {
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+}
+
+.pokedex-card .card h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+  color: #0984e3;
+}
+
+.pokedex-card .card p {
+  font-size: 1rem;
+}
+
+.pokedex-card .card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* Toast Notification */
+.toast {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background: #fdcb6e;
+  color: #2d3436;
+  padding: 1rem 2rem;
+  border-radius: 5px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  animation: fadeInOut 4s ease-in-out;
+}
+
+@keyframes fadeInOut {
+  0%, 100% { opacity: 0; transform: translateY(20px); }
+  10%, 90% { opacity: 1; transform: translateY(0); }
+}
+
+/* Loading Screen */
+.loading {
+  font-size: 1.5rem;
+  color: #fff;
+  text-align: center;
+  padding: 2rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .navbar input[type="text"] {
+    margin-top: 0.5rem;
+    width: 90%;
+  }
+
+  .card-container {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  }
+}

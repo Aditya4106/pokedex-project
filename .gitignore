@@ -7,9 +7,18 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# Dependencies
 node_modules
-dist
+
+# Build output
+dist/*
+!dist/assets/
+!dist/assets/**
+
+# SSR output
 dist-ssr
+
+# Local files
 *.local
 
 # Editor directories and files
