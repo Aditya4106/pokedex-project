@@ -12,8 +12,8 @@ const PokemonInfo = () => {
 
   const converter = (height) => {
     let x = (height * 10) / 30.48;
-    const y = Math.floor(x); // Get the feet part
-    x = Math.floor((x - y) * 100); // Get the inches part
+    const y = Math.floor(x);
+    x = Math.floor((x - y) * 100);
     setNewHeight(x);
     setNewHeight2(y);
   };
@@ -40,7 +40,6 @@ const PokemonInfo = () => {
     steel: "#9eb7b8",
     flying: "linear-gradient(180deg, rgb(23,198,251) 50%, rgb(193,191,191) 50%)",
     dragon: "linear-gradient(180deg, #53a4cf 50%, #f16e57 50%)",
-    
   };
 
   useEffect(() => {
@@ -49,9 +48,8 @@ const PokemonInfo = () => {
         const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${id}`);
         const result = await response.json();
         setPokemon(result);
-        const height = result.height;
+        converter(result.height);
         weightSet(result.weight);
-        converter(height);
       } catch (error) {
         console.error("Error fetching Pokemon details", error);
       }
@@ -60,21 +58,16 @@ const PokemonInfo = () => {
   }, [id]);
 
   useEffect(() => {
-
     document.documentElement.classList.add(styles.htmlbackground);
     document.body.classList.add(styles.bodybackground);
 
     return () => {
       document.documentElement.classList.remove(styles.htmlbackground);
       document.body.classList.remove(styles.bodybackground);
-    }
-  }, [])
+    };
+  }, []);
 
-
-  if (!pokemon) {
-    return <p>Loading...</p>;
-  }
-
+  if (!pokemon) return <p>Loading...</p>;
 
   return (
     <div className={styles.container}>
@@ -92,17 +85,16 @@ const PokemonInfo = () => {
             <div className={styles.box_content}>
               <div className="info_left">
                 <h3>
-                  Height <br />
+                  Height : <br />
                   {newHeight2}'{newHeight}"
                 </h3>
-
                 <h3>
-                  Weight <br /> {weight} Kgs
+                  Weight : <br /> {weight} Kgs
                 </h3>
               </div>
               <div className={styles.info_right}>
                 <h3>
-                  Abilities <br />
+                  Abilities : <br />
                   {pokemon.abilities
                     .map((item) => item.ability.name)
                     .join(", ")}
@@ -114,21 +106,14 @@ const PokemonInfo = () => {
               <div className={styles.type_boxes}>
                 {pokemon.types.map((item) => {
                   const typename = item.type.name;
-                  let bgcolor = typeColors[typename];
-
-                  // Ensure bgcolor is a string
-                  if (typeof bgcolor !== "string") {
-                    bgcolor = ""; // or a default color
-                  }
+                  let bgcolor = typeColors[typename] || "#888";
 
                   return (
                     <div
                       key={typename}
                       style={{
-                        background: bgcolor.includes("linear-gradient")
-                          ? bgcolor
-                          : bgcolor,
-                        color: "white", // Set text color to white for contrast
+                        background: bgcolor,
+                        color: "white",
                         height: "2rem",
                         width: "7rem",
                         textAlign: "center",
@@ -156,7 +141,7 @@ const PokemonInfo = () => {
             </ul>
           </div>
           <div className={styles.back_img}>
-            <img 
+            <img
               src={pokemon.sprites.back_default}
               width="259rem"
               alt={pokemon.name}
