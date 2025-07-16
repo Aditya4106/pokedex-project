@@ -1,25 +1,29 @@
-
-
 .bodybackground {
-  width: 100%; /* Full width on smaller screens */
-  position: relative;
-  z-index: 1000;
-  padding: 0; /* Add some padding for mobile */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  width: 100%;
+  padding: 1rem;
+  background: linear-gradient(to bottom right, #5fa9f0, #6a9ded);
+  box-sizing: border-box;
 }
 
 .container {
   display: flex;
-  flex-direction: column; /* Stack items vertically on small screens */
+  flex-direction: column;
   width: 100%;
   max-width: 45rem;
   justify-content: center;
-  padding: 0 0; /* Add some padding */
+  padding: 0;
+  box-sizing: border-box;
 }
 
 .h2 {
   font-size: 1.2rem;
   margin-top: 10px;
   margin-bottom: 10px;
+  color: black;
 }
 
 .desc {
@@ -30,124 +34,153 @@
   background-color: white;
   width: 100%;
   border: 1px solid rgb(78, 76, 76);
-  border-radius: 8px; /* Rounded corners for mobile */
-  overflow: hidden; /* Ensure content stays within bounds */
+  border-radius: 8px;
+  overflow: hidden;
 }
 
 .h1 {
   color: white;
   padding: 5px;
-  margin-bottom: 10px 0;
+  margin-bottom: 10px;
   text-align: center;
   background-color: #A5243D;
 }
 
 .pokemoninfo {
   display: flex;
-  flex-direction: column; /* Stack items vertically on small screens */
+  flex-direction: column;
   gap: 1.2rem;
 }
 
-.textbox {
-  margin-left: 0; /* Reset margin on small screens */
+.box_img {
+  display: flex;
+  justify-content: center;
 }
 
-.info_left {
-  width: 100%; /* Full width on smaller screens */
-  margin-bottom: 1rem; /* Add margin below */
+.textbox {
+  margin-left: 0;
+  color: white;
 }
 
 .box_content {
-  height: auto; /* Adjust height for small screens */
-  width: 100%;
-  display: flex;
-  flex-direction: column; /* Stack items vertically */
-  border-radius: 2%;
   background-color: #163d73;
-  margin-top: 10px;
-  padding: 1rem;
+  color: white;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 1.2rem;
+  border-radius: 8px;
+  justify-content: space-between;
+  align-items: flex-start; /* Important for vertical alignment */
+  min-height: 9rem;
+  width: 100%;
+  box-sizing: border-box;
 }
 
+.info_left,
 .info_right {
-  margin-left: 0; /* Reset margin on small screens */
-  width: 100%; /* Full width on smaller screens */
+  width: 48%; /* Keep side-by-side */
+  color: white;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
 }
 
 h3 {
   margin: 1rem;
-  font-size: 1rem; /* Adjust font size for small screens */
+  font-size: 1rem;
 }
 
 .type_boxes {
   display: flex;
-  flex-wrap: wrap; /* Wrap items to next line */
+  flex-wrap: wrap;
   gap: 1rem;
-}
-.box_img{
-  display: flex;
   justify-content: center;
 }
 
 .stats_img {
   display: flex;
-  flex-direction: column; /* Stack items vertically on small screens */
-  gap: 2rem;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.stats {
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .stats ul {
   list-style: none;
-  font-size: 1rem; /* Adjust font size for small screens */
+  font-size: 1rem;
   margin-top: 1rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
+  background-color: #163d73;
+  color: white;
+  padding: 1.2rem;
+  border-radius: 8px;
+  min-height: 9rem;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
-/* Media query for larger screens (e.g., tablets and desktops) */
+.back_img {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.back_img img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Responsive Design */
 @media (min-width: 768px) {
-  .container{
+  .container {
     margin-top: 2rem;
-  }
-  .bodybackground{
-    display: flex;
-    justify-content: center;
   }
 
   .pokemoninfo {
-    flex-direction: row; /* Align items side by side on larger screens */
+    flex-direction: row;
   }
 
   .textbox {
     margin-left: 1rem;
     margin-right: 1rem;
-    color: aliceblue; /* Add margin on larger screens */
-  }
-
-  .info_left {
-    width: auto; /* Reset width on larger screens */
   }
 
   .box_content {
-    height: 9rem;
-    width: 22rem;
-    flex-direction: row; /* Align items side by side on larger screens */
+    flex-direction: row;
+    width: 100%;
   }
 
   .info_right {
-    margin-left: 2rem; /* Margin on larger screens */
-    width: auto; /* Reset width on larger screens */
+    margin-left: 1rem;
   }
 
   .stats_img {
-    gap: 8rem;
-    flex-direction: row; /* Align items side by side on larger screens */
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 4rem;
+    padding-top: 1rem;
   }
 
-  .type_boxes {
-    gap: 3rem;
+  .stats {
+    width: auto;
+    margin-left: 1rem;
   }
 
   .stats ul {
-    font-size: large; /* Font size for larger screens */
+    font-size: large;
+    width: 22rem;
+    min-height: 9rem;
+  }
+
+  .back_img {
+    align-self: flex-start;
   }
 }
